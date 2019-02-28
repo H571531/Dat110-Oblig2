@@ -1,10 +1,10 @@
 package no.hvl.dat110.broker;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import no.hvl.dat110.common.Logger;
 import no.hvl.dat110.messagetransport.Connection;
 
 public class Storage {
@@ -43,47 +43,45 @@ public class Storage {
 	public void addClientSession(String user, Connection connection) {
 
 		// TODO: add corresponding client session to the storage
-		
-		throw new RuntimeException("not yet implemented");
-		
+		ClientSession leggTil = new ClientSession(user, connection);
+		clients.putIfAbsent(user, leggTil);
 	}
 
 	public void removeClientSession(String user) {
 
 		// TODO: remove client session for user from the storage
-
-		throw new RuntimeException("not yet implemented");
-		
+		if(clients.containsKey(user)) {
+			clients.remove(user);
+		}
 	}
 
 	public void createTopic(String topic) {
 
 		// TODO: create topic in the storage
-
-		throw new RuntimeException("not yet implemented");
-	
+		Set<String> set = new HashSet<String>();
+		set.add(topic);
+		
+		subscriptions.putIfAbsent(topic, set);
 	}
 
 	public void deleteTopic(String topic) {
 
 		// TODO: delete topic from the storage
-
-		throw new RuntimeException("not yet implemented");
-		
+		subscriptions.remove(topic);
 	}
 
 	public void addSubscriber(String user, String topic) {
 
 		// TODO: add the user as subscriber to the topic
+		Set<String> set = new HashSet<String>();
+		set.add(user);
 		
-		throw new RuntimeException("not yet implemented");
-		
+		subscriptions.put(topic, set);
 	}
 
 	public void removeSubscriber(String user, String topic) {
 
 		// TODO: remove the user as subscriber to the topic
-
-		throw new RuntimeException("not yet implemented");
+		subscriptions.remove(user, topic);
 	}
 }
