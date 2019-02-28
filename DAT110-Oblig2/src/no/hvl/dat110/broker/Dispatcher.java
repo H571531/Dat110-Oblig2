@@ -109,7 +109,7 @@ public class Dispatcher extends Stopable {
 
 		// TODO: create the topic in the broker storage 
 		
-		throw new RuntimeException("not yet implemented");
+		storage.createTopic(msg.getIdentifier());
 
 	}
 
@@ -119,7 +119,7 @@ public class Dispatcher extends Stopable {
 
 		// TODO: delete the topic from the broker storage
 		
-		throw new RuntimeException("not yet implemented");
+		storage.deleteTopic(msg.getTopic());
 	}
 
 	public void onSubscribe(SubscribeMsg msg) {
@@ -128,7 +128,7 @@ public class Dispatcher extends Stopable {
 
 		// TODO: subscribe user to the topic
 		
-		throw new RuntimeException("not yet implemented");
+		storage.addSubscriber(msg.getUser(), msg.getTopic());
 		
 	}
 
@@ -138,7 +138,7 @@ public class Dispatcher extends Stopable {
 
 		// TODO: unsubscribe user to the topic
 		
-		throw new RuntimeException("not yet implemented");
+		storage.removeSubscriber(msg.getUser(), msg.getTopic());
 
 	}
 
@@ -147,7 +147,8 @@ public class Dispatcher extends Stopable {
 		Logger.log("onPublish:" + msg.toString());
 
 		// TODO: publish the message to clients subscribed to the topic
-		
+			msg.getTopic();
+			
 		throw new RuntimeException("not yet implemented");
 		
 	}
