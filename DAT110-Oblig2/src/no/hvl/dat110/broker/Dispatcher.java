@@ -109,7 +109,7 @@ public class Dispatcher extends Stopable {
 		if(msg.getTopic()!=null) {
 			storage.createTopic(msg.getTopic());
 		}else {
-			System.out.println("Noe skjedde her. ");
+			Logger.log("Topic is null");
 		}
 		
 	}
