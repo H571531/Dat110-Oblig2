@@ -6,35 +6,40 @@ import no.hvl.dat110.messages.PublishMsg;
 import no.hvl.dat110.iotsystem.*;
 
 public class DisplayDevice {
-	
+
 	private static final int COUNT = 10;
-	
-	private  boolean connected;
-		
-	public static void main (String[] args) {
-		
+
+	public static void main(String[] args) {
+
 		System.out.println("Display starting ...");
-		Message recieved;
-		Client display=new Client("display",Common.BROKERHOST,Common.BROKERPORT);
+		PublishMsg received;
+		Client display = new Client("display", Common.BROKERHOST, Common.BROKERPORT);
+
+		String topic = "TemperatureMeasurements";
+
 		display.connect();
-		display.createTopic("temperature");
-		display.subscribe("temperature");
-		
+		display.createTopic(topic);
+		display.subscribe(topic);
+
 		// TODO - START
-				for(int i=0;i<COUNT;i++) {
-					recieved=display.receive();
-					System.out.println(recieved);
-				}
+		for (int i = 0; i < COUNT; i++) {
+			
+			received = (PublishMsg) display.receive();
+			display(received.getMessage());
+			
+		}
+		
 		// TODO - END
 		display.disconnect();
 		System.out.println("Display stopping ... ");
 
-		
-	
 	}
-	
-	
+
+	private static void display(String message) {
+		System.out.println("//////////////////////////////////////");
+		System.out.println("DISPLAY: " + message);
+		System.out.println("//////////////////////////////////////");
 		
-	
-	
+	}
+
 }

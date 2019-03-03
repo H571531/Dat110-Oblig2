@@ -22,7 +22,7 @@ public class DeleteTopicMsg extends Message {
 
 	@Override
 	public String toString() {
-		return "DeleteTopicMsg [topic=" + topic + "]";
+		return super.toString() + "[topic=" + topic + "]";
 	}
 	
 	
