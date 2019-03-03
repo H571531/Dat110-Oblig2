@@ -16,16 +16,14 @@ public class CreateTopicMsg extends Message {
 	}
 
 
-
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
 
 
-
 	@Override
 	public String toString() {
-		return "Topic: "+topic;
+		return super.toString() + "[topic: " + topic + "]";
 	} 
 	
 	

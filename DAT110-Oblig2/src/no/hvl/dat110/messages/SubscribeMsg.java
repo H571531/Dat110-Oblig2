@@ -22,7 +22,7 @@ public class SubscribeMsg extends Message {
 
 	@Override
 	public String toString() {
-		return "SubscribeMsg [topic=" + topic + "]";
+		return super.toString() + "[topic=" + topic + "]";
 	}
 	
 }
