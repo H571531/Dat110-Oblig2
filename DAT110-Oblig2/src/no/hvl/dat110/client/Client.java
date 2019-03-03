@@ -1,6 +1,14 @@
 package no.hvl.dat110.client;
 
-import no.hvl.dat110.messages.*;
+import no.hvl.dat110.messages.ConnectMsg;
+import no.hvl.dat110.messages.CreateTopicMsg;
+import no.hvl.dat110.messages.DeleteTopicMsg;
+import no.hvl.dat110.messages.DisconnectMsg;
+import no.hvl.dat110.messages.Message;
+import no.hvl.dat110.messages.MessageUtils;
+import no.hvl.dat110.messages.PublishMsg;
+import no.hvl.dat110.messages.SubscribeMsg;
+import no.hvl.dat110.messages.UnsubscribeMsg;
 import no.hvl.dat110.messagetransport.Connection;
 import no.hvl.dat110.messagetransport.MessagingClient;
 
