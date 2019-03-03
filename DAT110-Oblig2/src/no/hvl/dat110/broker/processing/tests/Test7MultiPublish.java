@@ -4,10 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import no.hvl.dat110.broker.Broker;
-import no.hvl.dat110.broker.Dispatcher;
 import no.hvl.dat110.client.Client;
-import no.hvl.dat110.messages.Message;
 import no.hvl.dat110.messages.PublishMsg;
 
 public class Test7MultiPublish extends Test0Base {

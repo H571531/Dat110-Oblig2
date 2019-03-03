@@ -15,7 +15,6 @@ public class Dispatcher extends Stopable {
 	public Dispatcher(Storage storage) {
 		super("Dispatcher");
 		this.storage = storage;
-
 	}
 
 	@Override
@@ -106,11 +105,13 @@ public class Dispatcher extends Stopable {
 	public void onCreateTopic(CreateTopicMsg msg) {
 
 		Logger.log("onCreateTopic:" + msg.toString());
-
 		// TODO: create the topic in the broker storage 
+		if(msg.getTopic()!=null) {
+			storage.createTopic(msg.getTopic());
+		}else {
+			Logger.log("Topic is null");
+		}
 		
-		throw new RuntimeException("not yet implemented");
-
 	}
 
 	public void onDeleteTopic(DeleteTopicMsg msg) {
@@ -119,36 +120,30 @@ public class Dispatcher extends Stopable {
 
 		// TODO: delete the topic from the broker storage
 		
-		throw new RuntimeException("not yet implemented");
+		storage.deleteTopic(msg.getTopic());
 	}
 
 	public void onSubscribe(SubscribeMsg msg) {
 
 		Logger.log("onSubscribe:" + msg.toString());
-
 		// TODO: subscribe user to the topic
-		
-		throw new RuntimeException("not yet implemented");
-		
+		storage.addSubscriber(msg.getUser(), msg.getTopic());
 	}
 
 	public void onUnsubscribe(UnsubscribeMsg msg) {
-
 		Logger.log("onUnsubscribe:" + msg.toString());
-
-		// TODO: unsubscribe user to the topic
-		
-		throw new RuntimeException("not yet implemented");
-
+		// TODO: unsubscribe user to the topic	
+		storage.removeSubscriber(msg.getUser(), msg.getTopic());
 	}
 
 	public void onPublish(PublishMsg msg) {
-
 		Logger.log("onPublish:" + msg.toString());
-
 		// TODO: publish the message to clients subscribed to the topic
-		
-		throw new RuntimeException("not yet implemented");
-		
+		try {
+			storage.subscriptions.get(msg.getTopic())
+										 .forEach(c->storage.clients.get(c).send(msg));
+		}catch(Exception ex) {
+			Logger.log("Invalid Topic!");
+		}
 	}
 }

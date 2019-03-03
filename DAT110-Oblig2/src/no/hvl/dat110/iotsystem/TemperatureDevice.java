@@ -1,6 +1,7 @@
 package no.hvl.dat110.iotsystem;
 
 import no.hvl.dat110.client.Client;
+import no.hvl.dat110.messages.Message;
 
 public class TemperatureDevice {
 	
@@ -9,14 +10,16 @@ public class TemperatureDevice {
 	public static void main(String[] args) {
 		
 		TemperatureSensor sn = new TemperatureSensor();
-		
-		// TODO - start
-		
-		// TODO - end
-		
-		System.out.println("Temperature device stopping ... ");
-		
-		throw new RuntimeException("not yet implemented");
-		
+		Message recieved;
+		Client tempDevice=new Client("tempDevice",Common.BROKERHOST,Common.BROKERPORT);
+		tempDevice.connect();
+		for(int i=0;i<COUNT;i++) {
+			String temp=""+sn.read();
+			tempDevice.publish("temperature",temp);
+		}
+		tempDevice.disconnect();
+		System.out.println("Temperature device stopping ... ");	
 	}
+	
+	
 }
